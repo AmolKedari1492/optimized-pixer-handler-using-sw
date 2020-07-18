@@ -1,5 +1,5 @@
-const cacheName = ["my-sw-app"];
-const STATIC_ASSETS = [
+var cacheName = ["my-sw-app"];
+var STATIC_ASSETS = [
     '/',
     '/css/app.css',
     '/js/app.js',
@@ -33,12 +33,18 @@ self.addEventListener('fetch', e => {
     console.log('sw fetch')
     e.respondWith(
         caches.match(e.request).then(response => {
-            return response || fetch(e.request).then(res => {
-                return caches.open(cacheName).then(cache => {
-                    cache.put(e.request, res.clone());
-                    return res;
-                });
-            })
+            if (response) {
+                return response;
+            } else {
+                return fetch(e.request).then(res => {
+                    return caches.open(cacheName).then(cache => {
+                        cache.put(e.request, res.clone());
+                        return res;
+                    }).catch(function (error) {
+                        console.error(error)
+                    });
+                })
+            }
         })
     )
 })

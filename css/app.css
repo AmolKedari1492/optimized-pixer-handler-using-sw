@@ -1,0 +1,10 @@
+#imgContainer {
+    display: flex;
+}
+
+img {
+    height: 250px;
+    width: 250px;
+    margin: 10px;
+    border: 1px solid #e8e8e8;
+}
