@@ -1,10 +1,36 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 #imgContainer {
     display: flex;
 }
 
 img {
-    height: 250px;
-    width: 250px;
-    margin: 10px;
     border: 1px solid #e8e8e8;
+    height: 250px;
+    margin: 10px;
+    width: 250px;
+}
+
+section {
+    min-height: calc(100vh - (45px + 45px));
+}
+
+header, footer {
+    line-height: 1.2;
+    font-size: 21px;
+    font-weight: 700;
+    padding: 10px;
+    text-align: center;
+}
+
+header {
+    border-bottom: 1px solid #e8e8e8;    
+}
+
+footer {
+    border-top: 1px solid #e8e8e8;
 }

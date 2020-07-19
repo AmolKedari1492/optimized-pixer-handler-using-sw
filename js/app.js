@@ -1,3 +1,4 @@
+// Register SW
 if ("serviceWorker" in navigator) {
     // Register a SW
     navigator.serviceWorker.register('../sw.js').then((resp) => {
@@ -5,12 +6,14 @@ if ("serviceWorker" in navigator) {
     }).catch((error) => console.log(error))
 }
 
+// Images
 var urls = [
     "https://amol-dummy-bucket.s3.amazonaws.com/gif1.gif?interaction=UserClick&client=ad_media&os_name=macos&x1=google&x2=email&x3=pdfconvert&landing_url=abcd1",
     "https://amol-dummy-bucket.s3.amazonaws.com/img1.png?interaction=UserClick&client=ad_media&os_name=macos&x1=google&x2=email&x3=pdfconvert&landing_url=abcd1",
     "https://amol-dummy-bucket.s3.amazonaws.com/img2.png?interaction=UserClick&client=ad_media&os_name=macos&x1=google&x2=email&x3=pdfconvert&landing_url=abcd1"
 ];
 
+// Utility funtion
 function getBaseURL(url) {
     var indexOf = url.indexOf('?');
     url = url.substr(0, indexOf);
@@ -76,13 +79,14 @@ function replacedWithNewParams(queryParams) {
     return newQueryParams;
 }
 
-
+// Render image to DOM
 function renderImage(response) {
     var img = new Image();
     img.src = window.URL.createObjectURL(response);
     document.getElementById("imgContainer").appendChild(img);
 }
 
+// HTTP call
 function makeHTTPCall(originalUrl, callback) {
     return new Promise(function (res, rej) {
         var xmlHttp = new XMLHttpRequest();
@@ -95,6 +99,8 @@ function makeHTTPCall(originalUrl, callback) {
             }
         }
 
+        // Mapped existing url with
+        // given url queryparams
         var baseUrl = getBaseURL(originalUrl);
         var queryParams = parseQueryString(originalUrl);
         queryParams = replacedWithNewParams(queryParams);
